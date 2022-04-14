@@ -2,16 +2,31 @@ import React, { useState } from "react";
 
 const Login = () => {
   const [login, setLogin] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    email: "",
+    password: "",
+    confirmPass: "",
+  });
+
+  const handleFormInput = (event) => {
+    userInfo[event.target.name] = event.target.value;
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(userInfo);
+  };
   return (
     <div className="container">
-      <form className="w-50 mx-auto">
+      <form className="w-50 mx-auto" onSubmit={handleSubmit}>
         <h2 className="text-center">{login ? "Login" : "Register"}</h2>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address
           </label>
           <input
-            type="email"
+            onBlur={(event) => handleFormInput(event)}
+            type="text"
+            name="email"
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
@@ -25,7 +40,9 @@ const Login = () => {
             Password
           </label>
           <input
+            onBlur={(event) => handleFormInput(event)}
             type="password"
+            name="password"
             className="form-control"
             id="exampleInputPassword1"
           />
@@ -37,7 +54,9 @@ const Login = () => {
               Confirm Password
             </label>
             <input
+              onBlur={(event) => handleFormInput(event)}
               type="password"
+              name="confirmPass"
               className="form-control"
               id="exampleInputConfirmPassword1"
             />
