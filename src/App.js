@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Register from "./components/Register/Register";
 import Users from "./components/Users/Users";
 import UsersInfo from "./components/UsersInfo/UsersInfo";
+import RequireAuth from "./RequireAuth/RequireAuth";
 
 function App() {
   return (
@@ -15,7 +16,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/users" element={<Users />} />
-        <Route path="/user/:userId" element={<UsersInfo />} />
+        <Route
+          path="/user/:userId"
+          element={
+            <RequireAuth>
+              <UsersInfo />
+            </RequireAuth>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
