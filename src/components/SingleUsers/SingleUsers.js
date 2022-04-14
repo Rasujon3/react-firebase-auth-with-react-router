@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const SingleUsers = ({ user, children }) => {
   const { name, id } = user || {};
-  console.log(children);
   const { email, phone } = children || {};
   console.log(email, phone);
   return (
