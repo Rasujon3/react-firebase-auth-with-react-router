@@ -1,8 +1,12 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import CustomLink from "../../CustomLink/CustomLink";
+import auth from "../../Firebase/firebase.init";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
+  const [user, loading, error] = useAuthState(auth);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -38,7 +42,18 @@ const Navbar = () => {
               </CustomLink>
             </li>
           </ul>
-          <span className="navbar-text">USER</span>
+          <span className="navbar-text">
+            {!user ? (
+              "USER"
+            ) : (
+              <span>
+                {user.email}
+                <button onClick={() => signOut(auth)} className="btn btn-light">
+                  Sign Out
+                </button>
+              </span>
+            )}
+          </span>
         </div>
       </div>
     </nav>
